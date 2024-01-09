@@ -5,12 +5,23 @@
 def canUnlockAll(boxes):
     """return whether all the boxes can be opened or not"""
 
-    hash = {0: boxes[0]}
+    hash = {0}
+    closed = []
 
-    for idx in boxes:
-        for box, keys in list(hash.items()):
+    for idx in range(len(boxes)):
+        if idx in hash:
+            keys = boxes[idx]
             for key in keys:
-                if key not in hash:
-                    hash[key] = boxes[key]
+                if key < len(boxes) and key not in hash:
+                    hash.add(key)
+        else:
+            closed.append(idx)
 
-    return len(hash) == len(boxes)
+    count = len(closed)
+    for i in closed:
+        if i in hash:
+            keys = boxes[i]
+            for key in keys:
+                hash.add(key)
+            count -= 1
+    return count == 0

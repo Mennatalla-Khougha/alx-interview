@@ -40,8 +40,9 @@ if __name__ == "__main__":
             size += file_size
             stats[code] += 1
 
-            if count % 10 == 0:
+            if count == 10:
                 print_output(stats, size)
+                count = 0
         print_output(stats, size)
     except KeyboardInterrupt:
         print_output(stats, size)

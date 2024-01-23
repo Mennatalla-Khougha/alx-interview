@@ -36,10 +36,14 @@ if __name__ == "__main__":
             except(IndexError, ValueError):
                 continue
             size += file_size
-            stats[code] += 1
+            if code in stats:
+                stats[code] += 1
 
             if count % 10 == 0:
                 print_output(stats, size)
         print_output(stats, size)
     except KeyboardInterrupt:
+        # print_output(stats, size)
+        pass
+    finally:
         print_output(stats, size)

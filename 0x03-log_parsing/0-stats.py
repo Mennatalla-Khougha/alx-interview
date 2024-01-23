@@ -42,12 +42,13 @@ def print_output(stats, size):
     print(f"File size: {size}")
 
     for i in sorted(stats):
-        print(f"{i}: {stats[i]}")
+        if stats[i]:
+            print(f"{i}: {stats[i]}")
 
 
 if __name__ == "__main__":
     count = 0
-    stats = {}
+    stats = {200: 0, 301: 0, 400: 0, 401: 0, 403: 0, 404: 0, 405: 0, 500: 0}
     size = 0
 
     try:
@@ -55,17 +56,16 @@ if __name__ == "__main__":
             count += 1
             try:
                 parts = line.split(" ")
-                code = parts[-2]
+                code = int(parts[-2])
                 file_size = int(parts[-1])
             except(IndexError, ValueError):
                 continue
             size += file_size
-            stats[code] = stats.get(code, 0) + 1
+            stats[code] += 1
             # size = process_input(line, stats, size)
 
             if count % 10 == 0:
                 print_output(stats, size)
-
+        print_output(stats, size)
     except KeyboardInterrupt:
         print_output(stats, size)
-        sys.exit()

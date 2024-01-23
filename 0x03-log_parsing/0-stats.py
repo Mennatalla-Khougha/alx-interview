@@ -1,50 +1,45 @@
 #!/usr/bin/python3
-"""script that reads stdin line by line and computes metrics"""
+"""This module read stdin and compute metrics"""
 import sys
 
 
-def print_output(stats, size):
+def print_stats(size, status_codes):
+    """Print accumulated metrics.
+
+    Args:
+        size (int): The accumulated read file size.
+        status_codes (dict): The accumulated count of status codes.
     """
-    The function `print_output` prints the file size and the statistics in
-    a formatted manner.
-
-    :param stats: A dictionary containing statistics about a file. The keys
-    of the dictionary represent the type of statistic and the values represent
-    the corresponding count of that statistic
-    :param size: The `size` parameter represents the file size. It is a value
-    that indicates the size of a file in bytes
-    """
-    print(f"File size: {size}")
-
-    for i in sorted(stats):
-        if stats[i]:
-            print(f"{i}: {stats[i]}")
+    print("File size: {}".format(size))
+    for key in sorted(status_codes):
+        print("{}: {}".format(key, status_codes[key]))
 
 
-if __name__ == "__main__":
-    count = 0
-    stats = {200: 0, 301: 0, 400: 0, 401: 0, 403: 0, 404: 0, 405: 0, 500: 0}
-    size = 0
-
-    try:
-        for line in sys.stdin:
+size = 0
+status_codes = {}
+valid_codes = ['200', '301', '400', '401', '403', '404', '405', '500']
+count = 0
+try:
+    for line in sys.stdin:
+        if count == 10:
+            print_stats(size, status_codes)
+            count = 1
+        else:
             count += 1
-            try:
-                parts = line.split(" ")
-                if len(parts) < 4:
-                    continue
-                code = int(parts[-2])
-                file_size = int(parts[-1])
-            except(IndexError, ValueError):
-                continue
-            size += file_size
-            stats[code] += 1
-
-            if count % 10 == 0:
-                print_output(stats, size)
-        print_output(stats, size)
-    except KeyboardInterrupt:
-        print_output(stats, size)
-        raise SystemExit
-        # sys.exit()
-    # print_output(stats, size)
+        line = line.split()
+        try:
+            size += int(line[-1])
+        except (IndexError, ValueError):
+            pass
+        try:
+            if line[-2] in valid_codes:
+                if status_codes.get(line[-2], -1) == -1:
+                    status_codes[line[-2]] = 1
+                else:
+                    status_codes[line[-2]] += 1
+        except IndexError:
+            pass
+    print_stats(size, status_codes)
+except KeyboardInterrupt:
+    print_stats(size, status_codes)
+    raise

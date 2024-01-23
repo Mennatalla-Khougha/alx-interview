@@ -19,7 +19,7 @@ def process_input(line, stats, size):
     """
     try:
         parts = line.split(" ")
-        code = int(parts[-2])
+        code = parts[-2]
         file_size = int(parts[-1])
         size += file_size
         stats[code] = stats.get(code, 0) + 1
@@ -60,3 +60,4 @@ if __name__ == "__main__":
 
     except KeyboardInterrupt:
         print_output(stats, size)
+        sys.exit()

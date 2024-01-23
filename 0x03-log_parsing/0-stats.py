@@ -36,8 +36,7 @@ if __name__ == "__main__":
             except(IndexError, ValueError):
                 continue
             size += file_size
-            if code in stats:
-                stats[code] += 1
+            stats[code] += 1
 
             if count % 10 == 0:
                 print_output(stats, size)

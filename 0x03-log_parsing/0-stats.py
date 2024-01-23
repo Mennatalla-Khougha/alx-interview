@@ -42,7 +42,4 @@ if __name__ == "__main__":
                 print_output(stats, size)
         print_output(stats, size)
     except KeyboardInterrupt:
-        # print_output(stats, size)
-        pass
-    finally:
         print_output(stats, size)

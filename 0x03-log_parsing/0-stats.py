@@ -42,7 +42,7 @@ if __name__ == "__main__":
 
             if count % 10 == 0:
                 print_output(stats, size)
-        print_output(stats, size)
-    except KeyboardInterrupt:
         # print_output(stats, size)
+    except KeyboardInterrupt:
+        print_output(stats, size)
         sys.exit()

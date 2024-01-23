@@ -46,11 +46,11 @@ def print_output(stats, size):
 
 
 if __name__ == "__main__":
-    try:
-        count = 0
-        stats = {}
-        size = 0
+    count = 0
+    stats = {}
+    size = 0
 
+    try:
         for line in sys.stdin:
             count += 1
             size = process_input(line, stats, size)
@@ -59,5 +59,5 @@ if __name__ == "__main__":
                 print_output(stats, size)
 
     except KeyboardInterrupt:
-        # print_output(stats, size)
+        print_output(stats, size)
         sys.exit()

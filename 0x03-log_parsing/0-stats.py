@@ -31,6 +31,8 @@ if __name__ == "__main__":
             count += 1
             try:
                 parts = line.split(" ")
+                if len(parts) < 4:
+                    continue
                 code = int(parts[-2])
                 file_size = int(parts[-1])
             except(IndexError, ValueError):

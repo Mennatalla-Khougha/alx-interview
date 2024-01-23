@@ -53,7 +53,15 @@ if __name__ == "__main__":
     try:
         for line in sys.stdin:
             count += 1
-            size = process_input(line, stats, size)
+            try:
+                parts = line.split(" ")
+                code = parts[-2]
+                file_size = int(parts[-1])
+            except(IndexError, ValueError):
+                continue
+            size += file_size
+            stats[code] = stats.get(code, 0) + 1
+            # size = process_input(line, stats, size)
 
             if count % 10 == 0:
                 print_output(stats, size)

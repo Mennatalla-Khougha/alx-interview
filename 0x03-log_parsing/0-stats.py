@@ -18,7 +18,7 @@ def process_input(line, stats, size):
     :return: The variable "size" is being returned.
     """
     try:
-        parts = line.split()
+        parts = line.split(" ")
         code = int(parts[-2])
         file_size = int(parts[-1])
         size += file_size
@@ -59,5 +59,5 @@ if __name__ == "__main__":
                 print_output(stats, size)
 
     except KeyboardInterrupt:
-        print_output(stats, size)
+        # print_output(stats, size)
         sys.exit()

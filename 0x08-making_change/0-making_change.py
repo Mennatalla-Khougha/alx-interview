@@ -1,9 +1,9 @@
 #!/usr/bin/python3
-from typing import List
 """
 Given a pile of coins of different values, determine the fewest number
 of coins needed to meet a given amount total
 """
+from typing import List
 
 
 def makeChange(coins: List[int], amount: int) -> int:
@@ -25,7 +25,7 @@ def makeChange(coins: List[int], amount: int) -> int:
     >>> makeChange([2], 3)
     -1
     """
-    if amount == 0:
+    if amount <= 0:
         return 0
     res = [amount + 1] * (amount + 1)
     res[0] = 0

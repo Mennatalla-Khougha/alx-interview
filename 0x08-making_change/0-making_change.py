@@ -33,4 +33,7 @@ def makeChange(coins: List[int], amount: int) -> int:
             res[i] = min(
                 res.get(i, amount + 1), res.get(i - c, amount + 1) + 1
                 )
-    return res.get(amount, -1)
+    if res.get(amount, amount + 1) != amount + 1:
+        return res.get(amount, -1)
+    else:
+        return -1

@@ -25,9 +25,16 @@ def makeChange(coins: List[int], amount: int) -> int:
     >>> makeChange([2], 3)
     -1
     """
-    res = [0] + [float('inf')] * amount
-    for i in range(1, amount+1):
-        for j in coins:
-            if i >= j:
-                res[i] = min(res[i-j]+1, res[i])
-    return res[amount] if res[amount] != float('inf') else -1
+    if amount <= 0:
+        return 0
+    coins.sort(reverse=True)
+    change = 0
+    for c in coins:
+        if amount <= 0:
+            break
+        temp = amount // c
+        change += temp
+        amount -= (temp * c)
+    if amount != 0:
+        return -1
+    return change

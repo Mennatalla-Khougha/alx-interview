@@ -6,7 +6,7 @@ def isWinner(x, nums):
     """Determines if a player is the winner"""
     if x is None or nums is None or len(nums) == 0:
         return None
-    if x < 0:
+    if x < 1:
         return None
     if x < len(nums):
         return None

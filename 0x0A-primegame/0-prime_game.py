@@ -1,3 +1,4 @@
+
 #!/usr/bin/python3
 """Prime Game"""
 
@@ -6,15 +7,14 @@ def isWinner(x, nums):
     """Determines if a player is the winner"""
     if x is None or nums is None or len(nums) == 0:
         return None
-    if x < 0:
-        return None
-    if x < len(nums) or x > len(nums):
-        return None
+    # if x < 0:
+    #     return None
+    # if x < len(nums):
+    #     return None
 
     b_win, m_win, start = 0, 0, 3
     primes = [2]
     nums.sort()
-    nums = set(nums)
 
     for n in nums:
         if n < 2:
@@ -48,5 +48,4 @@ def isWinner(x, nums):
         return "Ben"
     if b_win < m_win:
         return "Maria"
-    if b_win == m_win:
-        return None
+    return None

@@ -11,36 +11,21 @@ def isWinner(x, nums):
     if x < len(nums):
         return None
 
-    b_win, m_win, start = 0, 0, 3
-    primes = []
-    nums.sort()
+    p, n = 2, max(nums)
+    b_win, m_win = 0, 0
+    primes = [True for i in range(n + 1)]
 
-    for n in nums:
-        if n < 2:
-            b_win += 1
-            continue
-        elif n % 2 == 0:
-            primes.append(2)
-            m_win += 1
-            continue
-        elif n % 2 == 0:
-            primes.append(2)
-            continue
+    while (p * p <= n):
+        if primes[p]:
+            for i in range(p * p, n + 1, p):
+                primes[i] = False
+        p += 1
 
-        prime = len(primes)
-        for ele in range(start, n + 1, 2):
-            for p in range(prime):
-                if ele % primes[p] == 0:
-                    break
-            if p == prime - 1:
-                primes.append(ele)
+    for ele in nums:
+        prime = 0
+        for i in range(2, ele + 1):
+            if primes[i]:
                 prime += 1
-
-        if n % 2 != 0:
-            start = ele
-        else:
-            start = ele + 1
-
         if prime % 2 == 0:
             b_win += 1
         else:

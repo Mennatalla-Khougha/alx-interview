@@ -8,7 +8,7 @@ def isWinner(x, nums):
         return None
     if x < 0:
         return None
-    if x < len(nums):
+    if x < len(nums) or x > len(nums):
         return None
 
     b_win, m_win, start = 0, 0, 3

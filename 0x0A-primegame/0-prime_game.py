@@ -20,7 +20,7 @@ def isWinner(x, nums):
             b_win += 1
             continue
 
-        if n == 2:
+        if n % 2 == 0:
             m_win += 1
             continue
 

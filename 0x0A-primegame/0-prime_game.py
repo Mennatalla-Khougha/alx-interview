@@ -13,10 +13,11 @@ def isWinner(x, nums):
 
     b_win, m_win, start = 0, 0, 3
     primes = [2]
-    nums = set(nums)
     nums.sort()
+    num = set(nums)
 
-    for n in nums:
+
+    for n in num:
         if n < 2:
             b_win += 1
             continue

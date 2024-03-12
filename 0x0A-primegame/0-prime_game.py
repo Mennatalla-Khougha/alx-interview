@@ -12,16 +12,19 @@ def isWinner(x, nums):
         return None
 
     b_win, m_win, start = 0, 0, 3
-    primes = [2]
+    primes = []
     nums.sort()
 
     for n in nums:
         if n < 2:
             b_win += 1
             continue
-
-        if n % 2 == 0:
+        elif n % 2 == 0:
+            primes.append(2)
             m_win += 1
+            continue
+        elif n % 2 == 0:
+            primes.append(2)
             continue
 
         prime = len(primes)
